@@ -1,0 +1,133 @@
+﻿@page
+@model DeriDeveloperWebApp.Pages.Portfolio.WorkModel
+@{
+	if (Model?.Work?.Id != null){
+		ViewData["Title"] = $"Портфолио - работа №{Model.Work.Id}";
+	}
+
+}
+
+
+<section>
+	<div class="container wrapper">
+		<div style="margin:100px 0 40px 0;">
+			<div class="radius-20 background-color-surface padding-20">
+				<div style="margin: 0 0 30px 0;">
+					<h1 style="margin: 0 0 10px 0;">@Model.Work.Title</h1>
+					<p>@Model.Work.Description</p>
+				</div>
+				<div>
+					@for(int i =0; i < Model.Work.Images.Count; i++){
+						<a href="~/@(DeriLibrary.WorkerImages.GetPathImage(!string.IsNullOrEmpty(Model.Work.Images[i].Path) ? "\\Portfolio\\Work\\" + Model.Work.Images[i].Path : " ", fullPath: DeriLibrary.Config.FolderPhotoRoot))">
+							
+							@if(i < Model.Work.Images.Count - 1){
+								<img style="margin-bottom:50px;"  src="~/@(DeriLibrary.WorkerImages.GetPathImage(!string.IsNullOrEmpty(Model.Work.Images[i].Path) ? "\\Portfolio\\Work\\" + Model.Work.Images[i].Path : " ", fullPath: DeriLibrary.Config.FolderPhotoRoot))" id="@Model.Work.Images[i].Id"/>
+							}
+							else{
+								<img src="~/@(DeriLibrary.WorkerImages.GetPathImage(!string.IsNullOrEmpty(Model.Work.Images[i].Path) ? "\\Portfolio\\Work\\" + Model.Work.Images[i].Path : " ", fullPath: DeriLibrary.Config.FolderPhotoRoot))" id="@Model.Work.Images[i].Id"/>
+							}
+						</a>
+					}
+				</div>
+				<div style="margin:30px 0 0 0;display: flex; flex-direction: column; align-items: flex-end;">
+					<div style="display: flex; align-items: center;">
+						<img style="width:15px; height:auto;" src="~/images/EyeLight.png"/>
+						<p style="margin-left: 5px;">@Model.Work.NumberOfViews</p>
+					</div>
+					<p>Дата публикации @Model.Work.Date.ToString("dd.MM.yyyy")</p>
+				</div>
+			</div>
+			<div class="radius-20 background-color-surface padding-20 margin-t-60">
+				<h1 style="margin: 0 0 10px 0;">Оставить отзыв</h1>
+				<div style="background-color:#1E1D1E; border-radius:20px; padding:20px 30px; margin-top:20px;">
+					<form method="post">
+						<div class="input-container">
+							<div style="display:flex;">
+								<h4>Имя <p style="color: #EE8078; display: inline-block;">*</p></h4>
+							</div>
+							<input class="input-text" name="name" maxlength="50" style="max-width: 200px; width: 100%;" type="text" required/>
+						</div>
+						<div class="input-container">
+							<div style="display:flex;">
+								<h4>Оценка <p style="color: #EE8078; display: inline-block;">*</p></h4>
+							</div>
+							<input class="input-text" name="estimation" type="radio" id="EstimationChoiceOne" value="1" required style="cursor:pointer;"/>
+							<label for="EstimationChoiceOne">1</label>
+							<input class="input-text" name="estimation" type="radio" id="EstimationChoiceTwo" value="2" required style="cursor:pointer;"/>
+							<label for="EstimationChoiceTwo">2</label>
+							<input class="input-text" name="estimation" type="radio" id="EstimationChoiceThree" value="3" required style="cursor:pointer;"/>
+							<label for="EstimationChoiceThree">3</label>
+							<input class="input-text" name="estimation" type="radio" id="EstimationChoiceFoure" value="4" required style="cursor:pointer;"/>
+							<label for="EstimationChoiceFoure">4</label>
+							<input class="input-text" name="estimation" type="radio" id="EstimationChoiceFive" value="5" required style="cursor:pointer;"/>
+							<label for="EstimationChoiceFive">5</label>
+						</div>
+						<div class="input-container">
+							<div style="display:flex;">
+								<h4>Текст <p style="color: #EE8078; display: inline-block;">*</p></h4>
+								
+							</div>
+							<textarea class="input-text" name="description" required style="resize: vertical; width:100%; height:100px;"></textarea>
+						</div>
+						<div class="input-container">
+							<div style="display:flex;">
+								<h4>Токен (выдаеться <a href="https://t.me/derideveloper" class="link-href-default">разработчиком</a>)<p style="color: #EE8078; display: inline-block;">*</p></h4>
+							</div>
+							<input class="input-text" name="token" style="max-width: 600px; width: 100%;" type="text" value="@(!string.IsNullOrEmpty(Model.ReviewsCreateToken) ? Model.ReviewsCreateToken : "")" required/>
+						</div>
+						<div class="input-container">
+							<input style="display:none;" name="work_id" type="text" value="@Model.Work.Id" required/>
+						</div>
+						<input class="input-text" style="padding:10px 0; max-width: 200px; width: 100%; background-color: #4690FF; color:#fff; cursor:pointer;" class="btn-corner-10" type="submit" asp-page-handler="ReviewPublic" value="Опубликовать"/>
+					</form>
+				</div>
+			</div>
+			
+			@if (@Model.Work.Reviews.Count > 0)
+			{
+				<div class="radius-20 background-color-surface padding-20 margin-t-60">
+					<h1 style="margin: 0 0 10px 0;">Отзывы</h1>
+					@foreach (var review in @Model.Work.Reviews)
+					{
+						<div class="review-background">
+							<div class="review-title-container">
+								<div class="review-title-profile-date">
+									<div class="review-title-profile-avatar" >
+										<!--<img style="width: 100%; height: 100%; border-radius: 100%;" src="~/@@(DeriLibrary.WorkerImages.GetPathImage(!string.IsNullOrEmpty(review.PathAvatar) ?  review.PathAvatar : " ", fullPath: DeriLibrary.Config.FolderPhotoRoot))"/>-->
+										<img class="review-title-profile-avatar-content" src="~/@(DeriLibrary.WorkerImages.GetPathImage(!string.IsNullOrEmpty("user.png") ?  "user.png" : " ", fullPath: DeriLibrary.Config.FolderPhotoRoot))"/>
+									</div>
+									<div class="review-title-profile-name-and-date">
+										<h1 class="review-title-profile-name">@review.Name</h1>
+										<p class="review-title-profile-date">@review.Date.ToString("dd.MM.yyyy HH:mm")</p>
+									</div>
+								</div>
+								<div class="review-title-estimation">
+									<div class="review-title-estimation-stars">
+										@for (int i = 1; i <= 5; i++)
+										{
+											@if (i <= review.Estimation)
+											{
+												<img src="~/images/StarFill.png" style="margin:0 3px; height:20px;"/>
+											}
+											else
+											{
+												<img src="~/images/StarEmpty.png" style="margin:0 3px; height:20px;"/>
+											}
+										}
+									</div>
+									<div class="review-title-estimation-emoji">
+										<!--<img style="margin-left: 15px; width:40px; height:40px;" src="~/@@(DeriLibrary.WorkerImages.GetPathImage(!string.IsNullOrEmpty(review.PathEmojiEstimation) ? "\\Portfolio\\Work\\" + review.PathEmojiEstimation : " ", fullPath: DeriLibrary.Config.FolderPhotoRoot))"/>-->
+										<img src="~/@(DeriLibrary.WorkerImages.GetPathImage(!string.IsNullOrEmpty("EmojiReviewExcellent.png") ? "EmojiReviewExcellent.png" : " ", fullPath: DeriLibrary.Config.FolderPhotoRoot))"/>
+									</div>
+								</div>
+							</div>
+							<div class="review-description-container">
+								<p class="review-description-content">@review.Description</p>
+							</div>
+						</div>
+					}
+				</div>
+			}
+		</div>
+	</div>
+</section>

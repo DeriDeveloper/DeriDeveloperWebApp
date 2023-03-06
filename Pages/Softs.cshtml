@@ -1,0 +1,151 @@
+﻿@page
+@model SoftsModel
+@{
+	ViewData["Title"] = "Программы";
+	ViewData["menu-main-top-softs-active"] = "menu-main-top-active";
+
+	//var startIndex = (Model.NumberPage - 1) * DeriDeveloperWebApp.Pages.SoftsModel.QuantityPerPage;
+
+	//long startNumberPage = Model.NumberPage;
+	//int countButtons = 0;
+
+
+}
+
+<section>
+	<div class="container wrapper" style="display: flex; align-content: center; justify-content: space-between; align-items: center;">
+		<div style="padding: 0 20px 20px 20px;">
+
+
+
+			<!--<div class="container-search">
+			<div class="container-search-input">
+			<input type="text" id="search-input"/>
+			</div>
+			<button class="container-search-btn" id="search-btn" type="submit" onclick="Test();">
+			<div class="container-search-btn-background">
+			<p>поиск</p>
+			</div>
+			</button>
+			</div>-->
+
+			@{
+				var softs = DeriDeveloperWebApp.Pages.SoftsModel.GetSofts(Model.NumberPage);
+
+				if (softs != null)
+				{
+					foreach (DeriDeveloperWebApp.Models.Soft soft in softs)
+					{
+
+						<div class="soft-main-container">
+							<div class="soft-main-container-header">
+								<!--<img src="~/@@(soft.ImageLogo)" class="soft-main-container-header-logo"/>-->
+								<p class="soft-main-container-header-title">@soft.Name</p>
+							</div>
+							<div class="soft-main-container-image-and-description">
+								<div class="soft-main-container-image">
+									<!--<img src="~/images/@@(soft.Image.Path)" />-->
+								</div>
+								<div class="soft-main-container-description">
+									<p>@(soft.Description)</p>
+								</div>
+							</div>
+							<a href="~/softs/@(soft.PathProgram)" download class="soft-main-container-download-btn">
+								<div class="soft-main-container-download-btn-content">Скачать</div>
+							</a>
+						</div>
+
+					}
+				}
+
+
+			/*@if (Model.NumberPage <= Model.PageCount)
+			{
+				<div class="move-buttons-page">
+					@if (Model.NumberPage > 1)
+					{
+						<button class="move-button-page move-button-page-passive" title="&lt;" type="submit" onclick="GetNumPageLink(@Model.NumberPage-1);">&lt;</button>
+					}
+
+					@if (startIndex == 0)
+					{
+						startIndex += 1;
+					}
+
+
+
+					@if (Model.PageCount > DeriDeveloperWebApp.Pages.SoftsModel.NumberOfPagesForMoveButtons)
+					{
+						@if ((Model.PageCount - Model.NumberPage) < DeriDeveloperWebApp.Pages.SoftsModel.NumberOfPagesForMoveButtons)
+						{
+							startNumberPage = startNumberPage - (DeriDeveloperWebApp.Pages.SoftsModel.NumberOfPagesForMoveButtons - (Model.PageCount - Model.NumberPage)) + 1;
+						}
+					}
+					else if (Model.PageCount <= DeriDeveloperWebApp.Pages.SoftsModel.NumberOfPagesForMoveButtons)
+					{
+						startNumberPage = 1;
+					}
+
+
+					@for (long i = startNumberPage; i <= Model.PageCount; i++)
+					{
+
+						if (Model.NumberPage == i)
+						{
+							<button class="move-button-page move-button-page-active" title="@i" type="submit" onclick="GetNumPageLink(@i);">@i</button>
+						}
+						else
+						{
+							<button  class="move-button-page move-button-page-passive" title="@i" type="submit" onclick="GetNumPageLink(@i);">@i</button>
+						}
+						countButtons += 1;
+						if (countButtons >= DeriDeveloperWebApp.Pages.SoftsModel.NumberOfPagesForMoveButtons)
+						{
+							break;
+						}
+
+					}
+
+
+
+					@if (Model.NumberPage < Model.PageCount)
+					{
+						<button class="move-button-page move-button-page-passive" title="&gt;" type="submit" onclick="GetNumPageLink(@Model.NumberPage+1);">&gt;</button>
+					}
+
+				</div>
+			}*/
+		}
+		</div>
+	</div>
+</section>
+
+
+
+<script type="text/javascript">
+	function GetNumPageLink(numPage)
+	{
+		console.log("page_number=" + numPage);
+
+		document.location.href = document.location.pathname + "?page_number=" + numPage;	
+
+		/*if(document.location.search.length >0){
+			document.location.href = document.location.pathname + document.location.search +"&number_page=" + numPage;	// split и если есть например number_page то удаляем элемент добавляем новый и выставляем
+			console.log(document.location.pathname);
+			console.log(document.location.search);
+		}
+		else{
+			document.location.href = document.location.pathname + "?number_page=" + numPage;	
+			console.log(document.location.pathname);
+			console.log(document.location.search);
+		}*/
+	}
+
+
+	function Test(){
+		 var s = document.getElementById("search-input");
+		document.location.href =  document.location.pathname + "?name=" + s.value;;
+	}	
+</script>
+
+

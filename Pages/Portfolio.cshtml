@@ -1,0 +1,73 @@
+﻿@page
+@model DeriDeveloperWebApp.Pages.PortfolioModel
+@{
+	ViewData["Title"] = "Портфолио";
+	ViewData["menu-main-top-portfolio-active"] = "menu-main-top-active";
+}
+
+
+<section>
+	<div class="container wrapper">
+		<div style="margin-top:100px;">
+			@if (Model.Portfolio?.categories != null)
+			{
+				@foreach (Models.Portfolio.Category category in Model.Portfolio.categories)
+				{
+					<div class="container-content  margin-tb-20 radius-20">
+						<h1>@category.Title</h1>
+						<div class="grid-container-portfolio">
+							@for (int i = 0; i < (category.Works.Count > 3 ? 3 : category.Works.Count); i++)
+							{
+								<a href="~/Portfolio/Work?id=@category.Works[i].Id">
+									<div style="position:relative;">
+										<!--<div class="opacity-hide" style="position:absolute; width:100%; height:100%; background-color: rgba(0,0,0,0.8);">
+										<div style="display: flex;height: inherit;align-items: flex-end;">
+										<div style="display:grid;grid-template-columns: 1fr 1fr; grid-template-rows: auto; gap: 0px 40px; padding:20px;width: -webkit-fill-available;align-items: end;">
+										<div style="grid-row:1; grid-column:1;">
+										<div style="display: flex; gap: 5px; align-content: center; align-items: center; justify-content: flex-start;">
+										<h1 style="font-size:20px;">@@category.Works[i].Title</h1>
+										</div>
+										<2!--<div style="display: flex; gap: 5px; align-content: center; align-items: center; justify-content: flex-start;">
+										<p style="font-size:16px;">@@work.Description</p>
+										</div>--2>
+										</div>
+										<div style="grid-row:1; grid-column:2;">
+										<div style="display: flex; gap: 5px; align-content: center; align-items: center; justify-content: flex-end;">
+										<img src="~/images/EyeLight.png" style="width:15px;height:auto;"/>
+										<p style="font-size:16px;">@@category.Works[i].NumberOfViews</p>
+										</div>
+										<div style="display: flex; gap: 5px; align-content: center; align-items: center; justify-content: flex-end;">
+										<p  style="font-size:16px;">@@category.Works[i].Date.ToString("dd.MM.yyyy")</p>
+										</div>
+										</div>
+										</div>
+										</div>
+										</div>-->
+										@if (category.Works[i].Images.Count > 0)
+										{
+											<img style="height:auto; width:100%; object-fit: cover;" src="/@(DeriLibrary.WorkerImages.GetPathImage(!string.IsNullOrEmpty(category.Works[i].Images[0].Path) ? "\\Portfolio\\Work\\" + category.Works[i].Images[0].Path: " ", fullPath: DeriLibrary.Config.FolderPhotoRoot))"/>
+										}
+										else
+										{
+											<img style="height:auto; width:100%; object-fit: cover;" src="/@(DeriLibrary.WorkerImages.GetPathImage(" ", fullPath: DeriLibrary.Config.FolderPhotoRoot))"/>
+										}
+									</div>
+								</a>
+							}
+							@if (category.Works.Count > 3)
+							{
+								<div class="grid-container-portfolio-btn-more-detailed">
+									<a href="~/Portfolio/works?category_id=@category.Id" class="button button-primary off-user-select background-color-secondary background-color-secondary-hover">
+										<div >
+											<p style="font-size: 18px; margin: 14px 100px;">Смотреть все</p>
+										</div>
+									</a>
+								</div>
+							}
+						</div>
+					</div>
+				}
+			}
+		</div>
+	</div>
+</section>

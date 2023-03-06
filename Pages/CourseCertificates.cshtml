@@ -1,0 +1,22 @@
+﻿@page
+@model DeriDeveloperWebApp.Pages.CourseCertificatesModel
+@{
+}
+
+
+<section>
+    <div class="container wrapper">
+        <div style="margin-top:100px; max-width:768px; margin-left:auto; margin-right:auto;">
+            @foreach (var courseCertificate in Model.CourseCertificates)
+            {
+                <div class="margin-tb-20 margin-lr-20">
+                    <a href="@courseCertificate.Path" style="cursor:zoom-in;">
+                        <img src="@courseCertificate.Path"/>
+                    </a>
+                    <h3>@(courseCertificate.Title)</h3>
+                    <a href="@(courseCertificate.Description)" target="_blank">Перейти к оригиналу</a>
+                </div>
+            }
+        </div>
+    </div>
+</section>

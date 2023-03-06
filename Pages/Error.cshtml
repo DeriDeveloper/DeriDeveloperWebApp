@@ -1,0 +1,69 @@
+﻿@page
+@model ErrorModel
+@{
+    ViewData["Title"] = "Error";
+
+
+}
+
+<!--<div class="error-background">
+    <div class="container error-black-hole-">
+        <div class="error-black-hole">
+
+        </div>
+    </div>
+
+    @@if (Model.PageStatusCode != 0)
+    {
+        <p class="error-status-code">
+            @@if (Model.PageStatusCode == 404)
+            {
+                <strong>@@Model.PageStatusCode</strong>
+            }
+            else
+            {
+                <strong>@@Model.PageStatusCode</strong>
+            }
+        </p>
+        <p class="error-status-code-description">
+            @@if (Model.PageStatusCode == 404)
+            {
+                <strong>Эту страницу поглотила черная дыра,<br>поэтому ее не существует</strong>
+            }
+            else{
+                <strong>Неизвестная ошибка</strong>
+            }
+        </p>
+    }
+
+
+</div>-->
+
+
+<section>
+    <div class="wrapper container">
+        <div class="error-black-hole"></div>
+        @if (Model.PageStatusCode != 0)
+        {
+            <p class="error-status-code">
+                @if (Model.PageStatusCode == 404)
+                {
+                    <strong>@Model.PageStatusCode</strong>
+                }
+                else
+                {
+                    <strong>@Model.PageStatusCode</strong>
+                }
+            </p>
+            <p class="error-status-code-description">
+                @if (Model.PageStatusCode == 404)
+                {
+                    <strong>Эту страницу поглотила черная дыра,<br>поэтому ее не существует</strong>
+                }
+                else{
+                    <strong>Неизвестная ошибка</strong>
+                }
+            </p>
+        }
+    </div>
+</section>

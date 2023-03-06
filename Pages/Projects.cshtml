@@ -1,0 +1,23 @@
+﻿@page
+@model DeriDeveloperWebApp.Pages.ProjectsModel
+@{
+	ViewData["Title"] = "Мои проекты";
+
+	ViewData["menu-main-top-projects-active"] = "menu-main-top-active";
+	
+
+
+}
+<section>
+	<div class="container wrapper">
+		<div style="margin-top:100px;">
+
+				@(Html.Raw(Services.Background.Worker.GetProjectContainerHtml(title: "Телеграмм бот расписание", description: "Описание", urlImage: "~/", link: "https://t.me/schedule_derideveloper_bot")))
+				@(Html.Raw(Services.Background.Worker.GetProjectContainerHtml(title: "Вк бот расписание", description: "Описание", urlImage: "~/", link: "https://vk.com/im?media=&sel=-206891053")))
+				@(Html.Raw(Services.Background.Worker.GetProjectContainerHtml(title: "Сайт расписание", description: "Описание", urlImage: "~/", link: "http://derideveloper.ru:7040/")))
+				@(Html.Raw(Services.Background.Worker.GetProjectContainerHtml(title: "Телеграм бот аренды сервера", description: "Описание", urlImage: "~/", link: "https://t.me/ControllerForBotsDeriTelegramBot")))
+				@(Html.Raw(Services.Background.Worker.GetProjectContainerHtml(title: "Телеграм бот Viktoria Nail Room", description: "Описание", urlImage: "~/", link: "https://t.me/VictoriaNailsRoomBot")))
+
+		</div>
+	</div>
+</section>

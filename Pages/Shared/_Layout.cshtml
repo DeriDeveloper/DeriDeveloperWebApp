@@ -1,0 +1,160 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+	<link rel="icon" type="image/x-icon" href="~/images/favicon.ico">
+    <link rel="stylesheet" href="~/css/style.css?@(DateTime.Now.Ticks)" />
+	<script src="~/js/Main.js?@(DateTime.Now.Ticks)"></script>
+
+</head>
+<body>
+	<div class="preloader preholder-background">
+		<div class="preloader__row">
+			<img src="~/images/LogoMiniLight.svg" style="width: 100%;"/>
+		</div>
+	</div>
+	<script>
+	  window.onload = function () {
+		document.body.classList.add('loaded_hiding');
+		window.setTimeout(function () {
+		  document.body.classList.add('loaded');
+		  document.body.classList.remove('loaded_hiding');
+		}, 500);
+	  }
+
+
+	</script>
+	
+
+
+
+
+
+
+
+
+
+    <header>
+	   <div style="width:100%;" class="container padding-lr-20">
+		   <nav class="top-menu">
+			   <a class="navbar-logo" href="/">
+				   <img class="header-logo" src="~/images/LogoFullDark.svg"/>
+				</a>
+				<ul class="menu-main">
+					<li><a href="~/" class="@ViewData["menu-main-top-home-active"]">Главная</a></li>
+					<li><a href="~/Softs?number_page=1" class="@ViewData["menu-main-top-softs-active"]">Программы</a></li>
+					<li><a href="~/Portfolio" class="@ViewData["menu-main-top-portfolio-active"]">Портфолио</a></li>
+					<!--<li><a href="~/CourseCertificates" class="@@ViewData["menu-main-top-course-certificates-active"]">Сертификаты</a></li>-->
+					<!--<li><a href="~/Contacts" class="@@ViewData["menu-main-top-contacts-active"]">Контакты</a></li>-->
+					<li><a href="~/Projects" class="@ViewData["menu-main-top-projects-active"]">Мои проекты</a></li>
+				</ul>
+				
+				<button id="ButtonVerticalTopMenu" class="top-menu-btn-show-menu-vertical" onclick="OpenVerticalTopMenu()">Меню</button>
+			</nav>
+       </div>
+    </header>
+	<div class="content">
+		@RenderBody()
+	</div>
+    <!--<div class="wrapper container">
+		<main> <!2--style="margin-top:80px; padding:20px;"-3->
+            
+
+        </main>
+    </div>-->
+
+    <footer class="border-top footer text-muted">
+        <div class="container-plr">
+       
+        </div>
+		<div class="footer-bg-info">
+			<div class="container">
+				<div class="footer-container-info">
+					<div class="float-left">
+						<p>© Все права защищены <a style="color:white; font-weight:bold;" href="http://derideveloper.ru/">Deri Developer</a> 2022 - @DateTime.Now.Year</p>
+					</div>
+					<div class="float-right">
+						<div class="footer-nav-right">
+							<!--<div class="nav-element">
+								<a href="/">Главная</a>
+							</div>
+							<div class="nav-element">
+								<a href="/Softs">Программы</a>
+							</div>-->
+							<div class="nav-element">
+								<a href="https://www.liveinternet.ru/click"
+								target="_blank">
+									<img id="licnt5D3E" width="88" height="120" style="border:0" 
+									title="LiveInternet: показано количество просмотров и посетителей"
+									src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+									alt=""/>
+								</a>
+							<script>(function(d,s){d.getElementById("licnt5D3E").src=
+								"https://counter.yadro.ru/hit?t28.9;r"+escape(d.referrer)+
+								((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+
+								(s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
+								";h"+escape(d.title.substring(0,150))+";"+Math.random()})
+								(document,screen)</script>
+
+
+							</div>
+							<div class="nav-element footer-img-social-seti">
+								<a href="https://t.me/derideveloper" title="Telegram" target="_blank">
+									<img class="footer-img-social-seti" src="~/images/telegram-logo.png">
+								</a>
+							</div>
+							<div class="nav-element footer-img-social-seti">
+								<a href="https://kwork.ru/user/derideveloper" title="Kwork" target="_blank">
+									<img class="footer-img-social-seti" src="~/images/kwork-logo.png">
+								</a>
+							</div>
+							<div class="nav-element footer-img-social-seti">
+								<a href="https://vk.com/derideveloper" title="Vk"  target="_blank">
+									<img class="footer-img-social-seti" src="~/images/vk-logo.png">
+								</a>
+							</div>
+							<div class="nav-element footer-img-social-seti">
+								<a href="https://github.com/DeriDeveloper" title="GitHub"  target="_blank">
+									<img class="footer-img-social-seti" src="~/images/git-hub-logo.png">
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+        </div>
+    </footer>
+    
+    <!--<script src="~/lib/jquery/dist/jquery.min.js"></script>-->
+
+    @RenderSection("Scripts", required: false)
+
+	<!--<script>
+		var prevScrollpos = window.pageYOffset;
+
+		var header = document.getElementsByTagName("header");
+
+
+		var headerBottom = header.offsetTop + header.offsetHeight;
+
+		window.onscroll = function() {
+		  var currentScrollPos = window.pageYOffset;
+
+		  console.log(currentScrollPos);
+
+		  if (prevScrollpos <= currentScrollPos ){
+				header.classList.add("header-show");
+		  }
+		  else{  
+				header.classList.remove("header-show");
+
+
+		  }
+
+		  prevScrollpos = currentScrollPos;
+		}
+	</script>-->
+</body>
+</html>

@@ -1,0 +1,104 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Главная";
+    ViewData["menu-main-top-home-active"] = "menu-main-top-active";
+}
+
+<!--<div>
+    <div class="home-main-container-bg" >
+        <div class="home-main-container-left">
+            <div class="home-main-container-left-description">
+                <p class="home-main-container-hello">Привет, я Александр</p>
+                <p class="home-main-container-my-site">Это моя личная страница, можно сказать первый сайт</p>
+            </div>
+        </div>
+       
+        <div class="home-main-container-right">
+            <div class="home-main-container-right-i-with-qr-code">
+                
+                <img src="~/images/I-with-qr-code.png"/>
+            </div>
+        </div>
+    </div>
+    <!2--<video class="player" poster="~/images/no-video.jpg" src="@@Url.Content("~/video/test.mp4")" controls></video>--2>
+    <div class="container-my-projects">
+        
+    </div>
+    
+</div>-->
+
+<section class="i-home-section-main">
+    <div class="container wrapper i-home-section">
+        <div class="i-home-section-description-and-btn-portfolio">
+            <h1 style="font-size:46px;">Александр Гулидов</h1>
+            <p class="off-user-select" style="font-size:25px; margin: 20px 0 40px 0;">Привет, я программист с 2-х летним опытом, пишу на C#. Знаю SQL, HTML, CSS, JS, XAML, Xamarin, ASP.NET, ООП</p>
+            <a href="~/Portfolio/" class="button button-primary off-user-select i-home-section-button-portfolio background-color-primary-varianty">
+                <div >
+                    <p style="font-size:25px;">Портфолио</p>
+                </div>
+            </a>
+        </div>
+        <div class="i-home-section-image">
+            <img src="~/images/I_main_page.png"/>
+        </div>
+    </div>
+</section>
+<section>
+	<div class="container wrapper">
+		<div style="margin:100px 0 40px 0;">
+			@if (@Model.Reviews.Count > 0){
+				<div class="radius-20 background-color-surface padding-20 margin-t-60">
+				<h1 style="margin: 0 0 10px 0;">Последние @Model.Reviews.Count отзывов</h1>
+				@foreach (var review in @Model.Reviews)
+					{
+						<div class="review-background">
+							<div class="review-title-container">
+								<div class="review-title-profile-date">
+									<div class="review-title-profile-avatar" >
+										<!--<img style="width: 100%; height: 100%; border-radius: 100%;" src="~/@@(DeriLibrary.WorkerImages.GetPathImage(!string.IsNullOrEmpty(review.PathAvatar) ?  review.PathAvatar : " ", fullPath: DeriLibrary.Config.FolderPhotoRoot))"/>-->
+										<img class="review-title-profile-avatar-content" src="~/@(DeriLibrary.WorkerImages.GetPathImage(!string.IsNullOrEmpty("user.png") ?  "user.png" : " ", fullPath: DeriLibrary.Config.FolderPhotoRoot))"/>
+									</div>
+									<div class="review-title-profile-name-and-date">
+										<h1 class="review-title-profile-name">@review.Name</h1>
+										<p class="review-title-profile-date">@review.Date.ToString("dd.MM.yyyy HH:mm")</p>
+									</div>
+								</div>
+								<div class="review-title-estimation">
+									<div class="review-title-estimation-stars">
+										@for (int i = 1; i <= 5; i++)
+										{
+											@if (i <= review.Estimation)
+											{
+												<img src="~/images/StarFill.png" style="margin:0 3px; height:20px;"/>
+											}
+											else
+											{
+												<img src="~/images/StarEmpty.png" style="margin:0 3px; height:20px;"/>
+											}
+										}
+									</div>
+									<div class="review-title-estimation-emoji">
+										<!--<img style="margin-left: 15px; width:40px; height:40px;" src="~/@@(DeriLibrary.WorkerImages.GetPathImage(!string.IsNullOrEmpty(review.PathEmojiEstimation) ? "\\Portfolio\\Work\\" + review.PathEmojiEstimation : " ", fullPath: DeriLibrary.Config.FolderPhotoRoot))"/>-->
+										<img src="~/@(DeriLibrary.WorkerImages.GetPathImage(!string.IsNullOrEmpty("EmojiReviewExcellent.png") ? "EmojiReviewExcellent.png" : " ", fullPath: DeriLibrary.Config.FolderPhotoRoot))"/>
+									</div>
+								</div>
+							</div>
+							<div class="review-description-container">
+								<p class="review-description-content">@review.Description</p>
+							</div>
+						</div>
+					}
+				</div>
+		}
+		</div>
+	</div>
+</section>
+<section>
+	<div class="container wrapper">
+		<div style="margin:100px 0 40px 0;">
+
+			
+		</div>
+	</div>
+</section>
